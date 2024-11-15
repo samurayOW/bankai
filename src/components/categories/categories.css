@@ -1,0 +1,83 @@
+.bankai__categories-heading {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.bankai__categories-heading h1 {
+    font-family: var(--font-family);
+    font-size: 32px;
+    color: #fff;
+}
+
+.bankai__categories-heading>p {
+    font-family: var(--font-family);
+    font-size: 18px;
+    color: var(--color-text);
+}
+
+.bankai__categories-center {
+    margin-top: 2rem;
+    background-color: pink;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bankai__categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.bankai__categories-list_item {
+    cursor: pointer;
+}
+
+.bankai__categories-list_item:first-child,
+.bankai__categories-list_item:last-child {
+    position: relative;
+    top: -50px;
+}
+
+.bankai__categories-list_item img {
+    width: 250px;
+    border-radius: 1rem;
+}
+
+.bankai__categories-list_item h4 {
+    text-align: center;
+    font-family: var(--font-family);
+}
+
+.bankai__categories-center>p {
+    text-align: center;
+    margin-top: 2rem;
+    font-family: var(--font-family);
+}
+
+.bankai__categories-btn {
+    font-family: var(--font-family);
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-app-navbar);
+    padding: 1rem;
+    width: 130px;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    color: #fff;
+}
+
+@media screen and (max-width: 880px) {
+
+    .bankai__categories-list_item:first-child,
+    .bankai__categories-list_item:last-child {
+        position: static;
+    }
+}

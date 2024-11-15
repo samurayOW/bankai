@@ -1,0 +1,54 @@
+.bankai__about-heading {
+    text-align: center;
+    font-family: var(--font-family);
+    margin-bottom: 2rem;
+}
+
+.bankai__about-heading h1 {
+    font-size: 32px;
+    color: #fff;
+}
+
+.bankai__about-heading p {
+    font-size: 18px;
+    color: var(--color-text);
+}
+
+.bankai__about-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px 100px;
+    justify-content: center;
+}
+
+.bankai__about-list_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+}
+
+.bankai__about-list_item div {
+    font-size: 27px;
+    background-color: pink;
+    padding: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bankai__about-list_item h3 {
+    font-size: 18px;
+    font-family: var(--font-family);
+    color: #fff;
+    margin: 1rem 0;
+}
+
+.bankai__about-list_item p {
+    font-size: 14px;
+    font-family: var(--font-family);
+    color: var(--color-text);
+    text-align: center;
+}

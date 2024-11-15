@@ -1,0 +1,82 @@
+.bankai__footer-section {
+    font-family: var(--font-family);
+    background-color: var(--color-app-navbar);
+    padding: 2rem 6rem;
+}
+
+.bankai__footer-logo img {
+    height: 80px;
+    border-radius: 2rem;
+}
+
+.bankai__footer-inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bankai__footer-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bankai__footer-info p {
+    color: var(--color-text);
+    margin: 1rem 0;
+}
+
+.bankai__footer-social-media-links {
+    display: flex;
+    gap: 30px;
+}
+
+.bankai__footer-social-media-links_item {
+    font-size: 20px;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    outline: 1px solid #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.bankai__footer-social-media-links_item:hover {
+    background-color: #fff;
+    color: var(--color-app-navbar);
+}
+
+.bankai__footer-links_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.bankai__footer-links_item {
+    font-size: 18px;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.links-title {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 24px;
+}
+
+.bankai__footer-section>p {
+    margin-top: 2rem;
+    color: var(--color-text);
+}
+
+@media screen and (max-width: 880px) {
+    .bankai__footer-inner {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .bankai__footer-section>p {
+        text-align: center;
+    }
+}

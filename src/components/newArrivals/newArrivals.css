@@ -1,0 +1,64 @@
+.bankai__new-arrivals-heading {
+    margin-top: 2rem;
+}
+
+.bankai__new-arrivals-heading h1 {
+    font-family: var(--font-family);
+    font-size: 32px;
+    color: #fff;
+}
+
+.bankai__new-arrivals-heading>p {
+    font-family: var(--font-family);
+    font-size: 18px;
+    color: var(--color-text);
+}
+
+.bankai__new-arrivals-heading_btn {
+    font-family: var(--font-family);
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: pink;
+    padding: 1rem;
+    width: 130px;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.bankai__new-arrivals-inner {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.bankai__new-arrivals-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+@media screen and (max-width: 1050px) {
+    .bankai__new-arrivals-list {
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 880px) {
+    .bankai__new-arrivals-inner {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bankai__new-arrivals-list {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bankai__new-arrivals-heading {
+        margin-top: 0rem;
+    }
+}

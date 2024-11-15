@@ -1,0 +1,37 @@
+.bankai__new-arrivals_item {
+    /* width: 200px; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bankai__new-arrivals_item img {
+    width: 200px;
+    border-radius: 1rem;
+}
+
+.bankai__new-arrivals_item p {
+    width: 200px;
+    text-align: center;
+    font-size: 18px;
+    font-family: var(--font-family);
+    margin-top: 1rem;
+    color: #fff;
+}
+
+.bankai__new-arrivals_item span {
+    width: 100px;
+    text-align: center;
+    font-size: 18px;
+    font-family: var(--font-family);
+    color: var(--color-text);
+}
+
+@media screen and (max-width: 1050px) {
+
+    .bankai__new-arrivals_item img,
+    .bankai__new-arrivals_item p {
+        width: 150px;
+    }
+}

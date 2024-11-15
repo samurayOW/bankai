@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.bankai__header-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    background: pink;
+    padding: 2rem 0;
+    border-radius: 2rem;
+}
+
+.bankai__header-heading {
+    display: grid;
+    place-items: center;
+}
+
+.bankai__header-heading>p {
+    font-family: var(--font-family);
+    font-size: 21px;
+    line-height: 1px;
+}
+
+.bankai__header-heading h1 {
+    font-family: "Permanent Marker", cursive;
+    font-size: 64px;
+}
+
+.bankai__header-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.bankai__header-info-item {
+    font-family: var(--font-family);
+}
+
+.bankai__header-info-item span {
+    font-size: 24px;
+}
+
+.bankai__header-info-line {
+    height: 50px;
+    width: 3px;
+    background-color: black;
+}
+
+.bankai__header-input {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bankai__header-input input {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    width: 300px;
+    height: 35px;
+    padding-left: 10px;
+}
+
+.bankai__header-input input::placeholder {
+    font-style: italic;
+}
+
+.bankai__header-input button {
+    background-color: var(--color-app-navbar);
+    border: none;
+    padding: 6px 7px;
+    border-radius: 3px;
+    position: relative;
+    left: -30px;
+    color: #fff;
+}
+
+@media screen and (max-width: 1100px) {
+    .bankai__header-image img {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 880px) {
+    .bankai__header-inner {
+        flex-direction: column;
+        margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .bankai__header-image img {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .bankai__header-inner {
+        padding: 1rem 0;
+    }
+
+    .bankai__header-image img {
+        width: 300px;
+    }
+
+    .bankai__header-heading>p {
+        font-size: 14px;
+    }
+
+    .bankai__header-heading h1 {
+        font-size: 48px;
+    }
+
+    .bankai__header-info {
+        gap: 25px;
+    }
+
+    .bankai__header-info-item span {
+        font-size: 18px;
+    }
+
+    .bankai__header-info-item p {
+        font-size: 16px;
+    }
+
+    .bankai__header-input input {
+        width: 250px;
+    }
+
+    .bankai__header-input input::placeholder {
+        font-size: 12px;
+    }
+
+
+}
+
+@media screen and (max-width: 370px) {
+    .bankai__header-input input {
+        width: 200px;
+    }
+
+    .bankai__header-input input::placeholder {
+        font-size: 9px;
+    }
+}

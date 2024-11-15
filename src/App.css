@@ -1,0 +1,16 @@
+.bankai__app {
+  background-color: var(--color-app-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bankai__app-inner {
+  background-color: var(--color-app-inner-bg);
+  width: 100vw;
+  max-width: 1600px;
+}
+
+.section__padding {
+  padding: 2rem;
+}

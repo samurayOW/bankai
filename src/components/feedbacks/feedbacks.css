@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.bankai__feedbacks-slider {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5rem;
+}
+
+.bankai__feedbacks-heading {
+    margin-bottom: 3rem;
+    color: #fff;
+}
+
+.bankai__feedbacks-heading h1 {
+    font-family: var(--font-family);
+    font-size: 32px;
+}
+
+.bankai__feedbacks-heading span {
+    font-family: "Permanent Marker", cursive;
+    font-size: 42px;
+}
+
+/* 
+===================================
+SLIDER STYLING
+===================================
+*/
+
+.slick-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+}
+
+.slick-list {
+    display: flex;
+    gap: 30px;
+}
+
+.slick-slide {
+    display: flex;
+    gap: 30px;
+    width: 400px;
+}
+
+.slick-slide div {
+    background-color: pink;
+    border-radius: 1rem;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.slide {
+    padding: 0;
+    padding: 10px;
+}
+
+.slide p {
+    font-family: var(--font-family);
+    margin-bottom: 1rem;
+}
+
+.slide img {
+    width: 70px;
+    border-radius: 50%;
+}
+
+.slider__customer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slider__customer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider__customer-info h4 {
+    font-family: var(--font-family);
+    text-align: center;
+}
+
+.slider__customer-info p {
+    font-size: 14px;
+    text-align: center;
+}
+
+.slider__customer-info_rating span {
+    font-family: var(--font-family);
+    margin-left: 0.5rem;
+    font-size: 24px;
+}
+
+.slick-arrow.slick-prev::before,
+.slick-arrow.slick-next::before {
+    background-color: var(--color-app-navbar);
+    padding: 1rem 0.5rem;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 990px) {
+    .slide p {
+        font-size: 13px;
+        line-height: 14px;
+    }
+
+    .slide img {
+        width: 50px;
+    }
+}
+
+@media screen and (max-width: 930px) {
+    .slick-slide {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .slick-slider {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .slick-slider {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .slick-slider {
+        width: 270px;
+    }
+
+    .slick-slide {
+        width: 260px;
+    }
+
+    .slick-arrow.slick-prev::before,
+    .slick-arrow.slick-next::before {
+        display: none;
+    }
+
+    .slide p {
+        font-size: 9px;
+        width: 150px;
+    }
+
+    .slider__customer {
+        flex-direction: column;
+    }
+}
