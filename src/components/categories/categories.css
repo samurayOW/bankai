@@ -81,3 +81,27 @@
         position: static;
     }
 }
+
+/* 
+========================
+ANIMATION
+========================
+*/
+.bankai__categories-list_item img {
+    transition: filter 0.3s ease;
+}
+
+.bankai__categories-list_item h4 {
+    transition: top 0.5s ease;
+}
+
+.bankai__categories-list_item:hover img {
+    filter: brightness(0.25);
+}
+
+.bankai__categories-list_item:hover h4 {
+    position: relative;
+    top: -200px;
+    color: #fff;
+    font-size: 32px;
+}
