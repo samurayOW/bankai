@@ -35,3 +35,27 @@
         width: 150px;
     }
 }
+
+/* 
+========================
+ANIMATION
+========================
+*/
+.bankai__new-arrivals_item img {
+    transition: filter 0.3s ease;
+}
+
+.bankai__new-arrivals_item p,
+.bankai__new-arrivals_item span {
+    transition: top 0.5s ease;
+}
+
+.bankai__new-arrivals_item:hover img {
+    filter: brightness(0.25);
+}
+
+.bankai__new-arrivals_item:hover p,
+.bankai__new-arrivals_item:hover span {
+    position: relative;
+    top: -200px;
+}
