@@ -30,9 +30,6 @@ function NewArrivals() {
           </div>
         </div>
         <ul className="bankai__new-arrivals-list">
-          {/* <NewArrivalsItem />
-          <NewArrivalsItem />
-          <NewArrivalsItem /> */}
           {mangas.map((manga) => (
             <NewArrivalsItem
               title={manga.Title}
