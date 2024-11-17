@@ -92,16 +92,16 @@ ANIMATION
 }
 
 .bankai__categories-list_item h4 {
-    transition: top 0.5s ease;
+    transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
 }
 
 .bankai__categories-list_item:hover img {
     filter: brightness(0.25);
 }
 
+
+
 .bankai__categories-list_item:hover h4 {
-    position: relative;
-    top: -200px;
+    transform: translateY(-200px) scale(2);
     color: #fff;
-    font-size: 32px;
 }
