@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaStar } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../strapi";
+import { MoonLoader } from "react-spinners";
 
 function FeedbacksItem({ feedback }) {
   return (
@@ -29,13 +30,16 @@ function FeedbacksItem({ feedback }) {
 
 function Feedbacks() {
   const [feedbacks, setFeedbacks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(function () {
     async function fetchFeedbacks() {
+      setIsLoading(true);
       const res = await fetch(`${BASE_URL}/api/feedbacks?populate=*`);
       const data = await res.json();
       data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setFeedbacks(data.data);
+      setIsLoading(false);
     }
     fetchFeedbacks();
   }, []);
@@ -63,11 +67,15 @@ function Feedbacks() {
       </div>
 
       <div className="bankai__feedbacks-slider">
-        <Slider {...settings}>
-          {feedbacks.map((feedback) => (
-            <FeedbacksItem feedback={feedback} key={feedback.id} />
-          ))}
-        </Slider>
+        {isLoading ? (
+          <MoonLoader color="pink" speedMultiplier={0.25} />
+        ) : (
+          <Slider {...settings}>
+            {feedbacks.map((feedback) => (
+              <FeedbacksItem feedback={feedback} key={feedback.id} />
+            ))}
+          </Slider>
+        )}
       </div>
     </section>
   );
