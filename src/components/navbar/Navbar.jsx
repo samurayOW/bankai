@@ -4,12 +4,17 @@ import { IoMdClose, IoMdPerson } from "react-icons/io";
 import "./navbar.css";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function NavbarLinks() {
   return (
     <ul className="bankai__navbar-links">
-      <li className="bankai__navbar-links_link">Home</li>
-      <li className="bankai__navbar-links_link">Buy manga</li>
+      <NavLink to="/">
+        <li className="bankai__navbar-links_link">Home</li>
+      </NavLink>
+      <NavLink to="manga">
+        <li className="bankai__navbar-links_link">Buy manga</li>
+      </NavLink>
       <li className="bankai__navbar-links_link">Contacts</li>
     </ul>
   );
