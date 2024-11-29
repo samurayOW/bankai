@@ -2,6 +2,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import "./categories.css";
 import { BASE_URL } from "../../strapi";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Category({ title, cover }) {
   return (
@@ -42,9 +43,11 @@ function Categories() {
             ))}
           </ul>
           <p>Discover your next favorite story: browse our genres</p>
-          <div className="bankai__categories-btn">
-            <p>Explore</p> <FaLongArrowAltRight />
-          </div>
+          <Link to="categories">
+            <div className="bankai__categories-btn">
+              <p>Explore</p> <FaLongArrowAltRight />
+            </div>
+          </Link>
         </div>
       </div>
     </section>
