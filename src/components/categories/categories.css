@@ -43,8 +43,15 @@
     top: -50px;
 }
 
+.page__category-item:first-child,
+.page__category-item:last-child {
+    position: static;
+    top: 0;
+}
+
 .bankai__categories-list_item img {
     width: 250px;
+    height: 350px;
     border-radius: 1rem;
 }
 
