@@ -1,9 +1,9 @@
 import Navbar from "../components/navbar/Navbar";
-import { FaLongArrowAltRight } from "react-icons/fa";
+// import { FaLongArrowAltRight } from "react-icons/fa";
 import { BASE_URL } from "../strapi";
 import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Footer from "../components/footer/Footer";
 
 function Category({ title, cover }) {

@@ -1,0 +1,36 @@
+.bankai__manga-list-item {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.bankai__manga-list-item img {
+    width: 200px;
+    height: 300px;
+    border-radius: 1rem;
+}
+
+.bankai__manga-list-item h4 {
+    font-family: var(--font-family);
+    color: #fff;
+    margin-top: 10px;
+}
+
+.bankai__manga-list-item p {
+    font-family: var(--font-family);
+    color: #fff;
+}
+
+.bankai__manga-list-item span {
+    font-family: var(--font-family);
+    color: var(--color-text);
+}
+
+@media screen and (max-width: 810px) {
+    .bankai__manga-list-item img {
+        width: 150px;
+        height: 225px;
+    }
+
+}

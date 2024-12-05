@@ -12,7 +12,7 @@ function NavbarLinks() {
       <NavLink to="/">
         <li className="bankai__navbar-links_link">Home</li>
       </NavLink>
-      <NavLink to="manga">
+      <NavLink to="/manga">
         <li className="bankai__navbar-links_link">Buy manga</li>
       </NavLink>
       <li className="bankai__navbar-links_link">Contacts</li>
