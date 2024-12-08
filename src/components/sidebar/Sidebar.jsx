@@ -6,17 +6,34 @@ import { MoonLoader } from "react-spinners";
 import { Slider } from "@mui/material";
 import { useSidebar } from "../../contexts/SidebarContext";
 
-function FilterItem({ id, title }) {
+function FilterItem({ type, id, title }) {
+  const { toggleGenreItem, toggleProductionItem } = useSidebar();
+  let handler;
+
+  switch (type) {
+    case "genre":
+      handler = toggleGenreItem;
+      break;
+    case "production":
+      handler = toggleProductionItem;
+      break;
+  }
+
   return (
     <li className="bankai__sidebar-filter_item">
-      <input type="checkbox" name={title} id={`checkbox-${id}`} />
+      <input
+        type="checkbox"
+        name={title}
+        id={`checkbox-${id}`}
+        onClick={() => handler(id)}
+      />
       <label htmlFor={`checkbox-${id}`}>{title}</label>
     </li>
   );
 }
 
-function RangeSlider() {
-  const [range, setRange] = useState([0, 100]);
+function RangeSlider({ range, setRange }) {
+  // const [range, setRange] = useState([0, 100]);
 
   const handleChange = (event, newValue) => {
     setRange(newValue);
@@ -64,9 +81,11 @@ function Sidebar() {
     isGenreHidden,
     isProductionHidden,
     isPriceHidden,
+    priceRange,
     toggleGenre,
     toggleProduction,
     togglePrice,
+    setPriceRange,
   } = useSidebar();
 
   useEffect(function () {
@@ -116,7 +135,12 @@ function Sidebar() {
             <MoonLoader color="#fff" speedMultiplier={0.25} />
           ) : (
             genres.map((genre) => (
-              <FilterItem id={genre.id} title={genre.Title} key={genre.id} />
+              <FilterItem
+                type="genre"
+                id={genre.id}
+                title={genre.Title}
+                key={genre.id}
+              />
             ))
           )}
         </ul>
@@ -141,6 +165,7 @@ function Sidebar() {
           ) : (
             productions.map((production) => (
               <FilterItem
+                type="production"
                 title={production.Title}
                 id={production.id}
                 key={production.id}
@@ -164,8 +189,8 @@ function Sidebar() {
             isPriceHidden ? "hidden" : ""
           }`}
         >
-          <RangeSlider />
-          <div className="price-range">0 - 100</div>
+          <RangeSlider range={priceRange} setRange={setPriceRange} />
+          <div className="price-range">{`${priceRange[0]} - ${priceRange[1]}`}</div>
         </ul>
       </div>
     </aside>
