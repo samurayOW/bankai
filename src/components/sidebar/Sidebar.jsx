@@ -25,7 +25,7 @@ function FilterItem({ type, id, title }) {
         type="checkbox"
         name={title}
         id={`checkbox-${id}`}
-        onClick={() => handler(id)}
+        onChange={() => handler(id)}
       />
       <label htmlFor={`checkbox-${id}`}>{title}</label>
     </li>
@@ -33,8 +33,6 @@ function FilterItem({ type, id, title }) {
 }
 
 function RangeSlider({ range, setRange }) {
-  // const [range, setRange] = useState([0, 100]);
-
   const handleChange = (event, newValue) => {
     setRange(newValue);
   };
@@ -86,6 +84,7 @@ function Sidebar() {
     toggleProduction,
     togglePrice,
     setPriceRange,
+    fetchMangasByParams,
   } = useSidebar();
 
   useEffect(function () {
@@ -192,6 +191,9 @@ function Sidebar() {
           <RangeSlider range={priceRange} setRange={setPriceRange} />
           <div className="price-range">{`${priceRange[0]} - ${priceRange[1]}`}</div>
         </ul>
+      </div>
+      <div className="bankai__filter-search-btn">
+        <button onClick={fetchMangasByParams}>Find</button>
       </div>
     </aside>
   );

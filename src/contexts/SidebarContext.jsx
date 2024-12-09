@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import { BASE_URL } from "../strapi";
 
 const SidebarContext = createContext(null);
 
@@ -10,6 +11,9 @@ const initialState = {
   genresList: [],
   productionList: [],
   priceRange: [0, 100],
+  sortPar: "newest",
+  mangaList: [],
+  isMangaLoading: false,
 };
 
 function reducer(state, action) {
@@ -42,6 +46,12 @@ function reducer(state, action) {
       };
     case "priceRange/set":
       return { ...state, priceRange: action.payload };
+    case "sortPar/set":
+      return { ...state, sortPar: action.payload };
+    case "mangaList/set":
+      return { ...state, mangaList: action.payload };
+    case "isMangaLoading/set":
+      return { ...state, isMangaLoading: action.payload };
 
     default:
       return state;
@@ -58,6 +68,9 @@ function SidebarProvider({ children }) {
       genresList,
       productionList,
       priceRange,
+      sortPar,
+      mangaList,
+      isMangaLoading,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -65,23 +78,81 @@ function SidebarProvider({ children }) {
   function toggleSidebar() {
     dispatch({ type: "sidebar/toggle" });
   }
+
   function toggleGenre() {
     dispatch({ type: "genre/toggle" });
   }
+
   function toggleProduction() {
     dispatch({ type: "production/toggle" });
   }
+
   function togglePrice() {
     dispatch({ type: "price/toggle" });
   }
+
   function toggleGenreItem(id) {
     dispatch({ type: "genres/toggleItem", payload: id });
   }
+
   function toggleProductionItem(id) {
     dispatch({ type: "production/toggleItem", payload: id });
   }
+
   function setPriceRange(range) {
     dispatch({ type: "priceRange/set", payload: range });
+  }
+
+  function setSortPar(e) {
+    dispatch({ type: "sortPar/set", payload: e.target.value });
+  }
+
+  function setMangaList(mangas) {
+    dispatch({ type: "mangaList/set", payload: mangas });
+  }
+
+  function setIsMangaLoading(data) {
+    dispatch({ type: "isMangaLoading/set", payload: data });
+  }
+
+  async function fetchMangas() {
+    setIsMangaLoading(true);
+    const res = await fetch(`${BASE_URL}/api/mangas?populate=*`);
+    const data = await res.json();
+    setMangaList(data.data);
+    setIsMangaLoading(false);
+  }
+
+  function sortMangas(data) {
+    switch (sortPar) {
+      case "newest":
+        return data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+      case "low":
+        return data.sort((a, b) => a.Price - b.Price);
+      case "high":
+        return data.sort((a, b) => b.Price - a.Price);
+    }
+  }
+
+  async function fetchMangasByParams() {
+    let query = "";
+
+    genresList.map((id) => (query += `filters[Genres][id][$in]=${id}&`));
+
+    productionList.map(
+      (id) => (query += `filters[production][id][$in]=${id}&`)
+    );
+
+    query += `filters[Price][$gte]=${priceRange[0]}&`;
+    query += `filters[Price][$lte]=${priceRange[1]}&`;
+
+    setIsMangaLoading(true);
+    const res = await fetch(`${BASE_URL}/api/mangas?${query}populate=*`);
+    const data = await res.json();
+    setMangaList(data.data);
+    setIsMangaLoading(false);
   }
 
   return (
@@ -94,6 +165,8 @@ function SidebarProvider({ children }) {
         genresList,
         productionList,
         priceRange,
+        isMangaLoading,
+        mangaList,
         toggleSidebar,
         toggleGenre,
         toggleProduction,
@@ -101,6 +174,11 @@ function SidebarProvider({ children }) {
         toggleGenreItem,
         toggleProductionItem,
         setPriceRange,
+        setSortPar,
+        setMangaList,
+        fetchMangas,
+        sortMangas,
+        fetchMangasByParams,
       }}
     >
       {children}

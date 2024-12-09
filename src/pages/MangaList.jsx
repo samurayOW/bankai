@@ -2,26 +2,23 @@ import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import "./mangaList.css";
 import Sidebar from "../components/sidebar/Sidebar";
-import { useEffect, useState } from "react";
-import { BASE_URL } from "../strapi";
+import { useEffect } from "react";
 import MangaItem from "../components/mangaItem/MangaItem";
 import { FaFilter } from "react-icons/fa6";
 import { useSidebar } from "../contexts/SidebarContext";
+import { MoonLoader } from "react-spinners";
 
 function MangaList() {
-  const [mangas, setMangas] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const { isSidebarHidden, toggleSidebar } = useSidebar();
+  const {
+    isMangaLoading,
+    mangaList,
+    toggleSidebar,
+    setSortPar,
+    fetchMangas,
+    sortMangas,
+  } = useSidebar();
 
   useEffect(function () {
-    async function fetchMangas() {
-      setIsLoading(true);
-      const res = await fetch(`${BASE_URL}/api/mangas?populate=*`);
-      const data = await res.json();
-      data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      setMangas(data.data);
-      setIsLoading(false);
-    }
     fetchMangas();
   }, []);
 
@@ -35,7 +32,7 @@ function MangaList() {
             <label htmlFor="sort" className="sort-label">
               Sort by:
             </label>
-            <select name="sort" id="sort">
+            <select name="sort" id="sort" onChange={setSortPar}>
               <option value="newest">Newest arrivals</option>
               <option value="low">Price: Low to High</option>
               <option value="high">Price: High to Low</option>
@@ -51,9 +48,13 @@ function MangaList() {
         <div className="bankai__manga-list-inner">
           <Sidebar />
           <ul className="bankai__manga-list-products">
-            {mangas.map((manga) => (
-              <MangaItem manga={manga} key={manga.id} />
-            ))}
+            {isMangaLoading ? (
+              <MoonLoader color="pink" speedMultiplier={0.25} />
+            ) : (
+              sortMangas(mangaList).map((manga) => (
+                <MangaItem manga={manga} key={manga.id} />
+              ))
+            )}
           </ul>
         </div>
       </section>
