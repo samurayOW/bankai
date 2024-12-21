@@ -5,17 +5,22 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import { MoonLoader } from "react-spinners";
 import { Slider } from "@mui/material";
 import { useSidebar } from "../../contexts/SidebarContext";
+import { GiCancel } from "react-icons/gi";
 
 function FilterItem({ type, id, title }) {
-  const { toggleGenreItem, toggleProductionItem } = useSidebar();
+  const { toggleGenreItem, toggleProductionItem, genresList, productionList } =
+    useSidebar();
   let handler;
+  let list;
 
   switch (type) {
     case "genre":
       handler = toggleGenreItem;
+      list = genresList;
       break;
     case "production":
       handler = toggleProductionItem;
+      list = productionList;
       break;
   }
 
@@ -26,6 +31,7 @@ function FilterItem({ type, id, title }) {
         name={title}
         id={`checkbox-${id}`}
         onChange={() => handler(id)}
+        checked={list.includes(id)}
       />
       <label htmlFor={`checkbox-${id}`}>{title}</label>
     </li>
@@ -79,12 +85,15 @@ function Sidebar() {
     isGenreHidden,
     isProductionHidden,
     isPriceHidden,
+    genresList,
     priceRange,
     toggleGenre,
     toggleProduction,
     togglePrice,
     setPriceRange,
+    fetchMangas,
     fetchMangasByParams,
+    clearFilter,
   } = useSidebar();
 
   useEffect(function () {
@@ -193,7 +202,17 @@ function Sidebar() {
         </ul>
       </div>
       <div className="bankai__filter-search-btn">
-        <button onClick={fetchMangasByParams}>Find</button>
+        <button onClick={() => fetchMangasByParams(genresList, 1)}>Find</button>
+      </div>
+      <div className="bankai__filter-search-btn_clear">
+        <button
+          onClick={() => {
+            clearFilter();
+            fetchMangas(1);
+          }}
+        >
+          <GiCancel /> Clear
+        </button>
       </div>
     </aside>
   );

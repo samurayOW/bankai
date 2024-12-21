@@ -108,7 +108,8 @@
     display: none;
 }
 
-.bankai__filter-search-btn {
+.bankai__filter-search-btn,
+.bankai__filter-search-btn_clear {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
@@ -117,12 +118,23 @@
 .bankai__filter-search-btn button {
     font-family: var(--font-family);
     font-size: 1.25rem;
-    /* height: 2rem; */
     padding: 5px 2rem;
     border: none;
     border-radius: 5px;
     background-color: pink;
-    /* margin-left: 1rem; */
+}
+
+.bankai__filter-search-btn_clear button {
+    font-family: var(--font-family);
+    font-size: 1rem;
+    padding: 5px 1.25rem;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 @media screen and (max-width: 810px) {

@@ -8,6 +8,7 @@
 
 .bankai__new-arrivals_item img {
     width: 200px;
+    height: 300px;
     border-radius: 1rem;
 }
 
@@ -18,6 +19,10 @@
     font-family: var(--font-family);
     margin-top: 1rem;
     color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
 }
 
 .bankai__new-arrivals_item span {
@@ -33,6 +38,10 @@
     .bankai__new-arrivals_item img,
     .bankai__new-arrivals_item p {
         width: 150px;
+    }
+
+    .bankai__new-arrivals_item img {
+        height: 225px;
     }
 }
 

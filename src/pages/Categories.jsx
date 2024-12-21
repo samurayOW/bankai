@@ -3,7 +3,7 @@ import Navbar from "../components/navbar/Navbar";
 import { BASE_URL } from "../strapi";
 import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "../components/footer/Footer";
 
 function Category({ title, cover }) {
@@ -45,11 +45,13 @@ function Categories() {
                 <MoonLoader color="#000" speedMultiplier={0.25} />
               ) : (
                 genres.map((genre) => (
-                  <Category
-                    title={genre.Title}
-                    cover={genre.Cover.url}
-                    key={genre.id}
-                  />
+                  <Link to={`/buy-manga/${genre.id}`}>
+                    <Category
+                      title={genre.Title}
+                      cover={genre.Cover.url}
+                      key={genre.id}
+                    />
+                  </Link>
                 ))
               )}
             </ul>

@@ -14,6 +14,8 @@ const initialState = {
   sortPar: "newest",
   mangaList: [],
   isMangaLoading: false,
+  pages: 1,
+  currentPage: 1,
 };
 
 function reducer(state, action) {
@@ -26,6 +28,8 @@ function reducer(state, action) {
       return { ...state, isProductionHidden: !state.isProductionHidden };
     case "price/toggle":
       return { ...state, isPriceHidden: !state.isPriceHidden };
+    case "genres/set":
+      return { ...state, genresList: action.payload };
     case "genres/toggleItem":
       const genreExists = state.genresList.includes(action.payload);
       return {
@@ -34,6 +38,8 @@ function reducer(state, action) {
           ? state.genresList.filter((genre) => genre !== action.payload)
           : [...state.genresList, action.payload],
       };
+    case "production/set":
+      return { ...state, productionList: action.payload };
     case "production/toggleItem":
       const productionExists = state.productionList.includes(action.payload);
       return {
@@ -52,6 +58,10 @@ function reducer(state, action) {
       return { ...state, mangaList: action.payload };
     case "isMangaLoading/set":
       return { ...state, isMangaLoading: action.payload };
+    case "pages/set":
+      return { ...state, pages: action.payload };
+    case "currentPage/set":
+      return { ...state, currentPage: action.payload };
 
     default:
       return state;
@@ -71,6 +81,8 @@ function SidebarProvider({ children }) {
       sortPar,
       mangaList,
       isMangaLoading,
+      pages,
+      currentPage,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -91,8 +103,16 @@ function SidebarProvider({ children }) {
     dispatch({ type: "price/toggle" });
   }
 
+  function setGenresList(list) {
+    dispatch({ type: "genres/set", payload: list });
+  }
+
   function toggleGenreItem(id) {
     dispatch({ type: "genres/toggleItem", payload: id });
+  }
+
+  function setProductionList(list) {
+    dispatch({ type: "production/set", payload: list });
   }
 
   function toggleProductionItem(id) {
@@ -115,11 +135,40 @@ function SidebarProvider({ children }) {
     dispatch({ type: "isMangaLoading/set", payload: data });
   }
 
-  async function fetchMangas() {
+  function setPages(data) {
+    dispatch({ type: "pages/set", payload: data });
+  }
+
+  function setCurrentPage(data) {
+    dispatch({ type: "currentPage/set", payload: data });
+  }
+
+  async function fetchMangas(page) {
     setIsMangaLoading(true);
-    const res = await fetch(`${BASE_URL}/api/mangas?populate=*`);
+    let sortParam = "createdAt:desc";
+    switch (sortPar) {
+      case "newest":
+        sortParam = "createdAt:desc";
+        break;
+      case "low":
+        sortParam = "Price:asc";
+        break;
+      case "high":
+        sortParam = "Price:desc";
+        break;
+      default:
+        sortParam = "createdAt:desc";
+    }
+
+    setIsMangaLoading(true);
+
+    const res = await fetch(
+      `${BASE_URL}/api/mangas?populate=*&sort=${sortParam}&pagination[page]=${page}&pagination[pageSize]=10`
+    );
     const data = await res.json();
     setMangaList(data.data);
+    setPages(data.meta.pagination.pageCount);
+    setCurrentPage(page);
     setIsMangaLoading(false);
   }
 
@@ -136,23 +185,49 @@ function SidebarProvider({ children }) {
     }
   }
 
-  async function fetchMangasByParams() {
+  async function fetchMangasByParams(genres, page) {
     let query = "";
-
-    genresList.map((id) => (query += `filters[Genres][id][$in]=${id}&`));
-
+    genres.map((id) => (query += `filters[Genres][id][$in]=${id}&`));
+    console.log("Genres query:", query);
     productionList.map(
       (id) => (query += `filters[production][id][$in]=${id}&`)
     );
-
     query += `filters[Price][$gte]=${priceRange[0]}&`;
     query += `filters[Price][$lte]=${priceRange[1]}&`;
 
+    let sortParam = "createdAt:desc";
+    switch (sortPar) {
+      case "newest":
+        sortParam = "createdAt:desc";
+        break;
+      case "low":
+        sortParam = "Price:asc";
+        break;
+      case "high":
+        sortParam = "Price:desc";
+        break;
+      default:
+        sortParam = "createdAt:desc";
+    }
+
     setIsMangaLoading(true);
-    const res = await fetch(`${BASE_URL}/api/mangas?${query}populate=*`);
+
+    const res = await fetch(
+      `${BASE_URL}/api/mangas?${query}populate=*&sort=${sortParam}&pagination[page]=${page}&pagination[pageSize]=10`
+    );
+
     const data = await res.json();
+
     setMangaList(data.data);
+    setPages(data.meta.pagination.pageCount);
+    setCurrentPage(page);
     setIsMangaLoading(false);
+  }
+
+  function clearFilter() {
+    setGenresList([]);
+    setProductionList([]);
+    setPriceRange([0, 100]);
   }
 
   return (
@@ -167,6 +242,9 @@ function SidebarProvider({ children }) {
         priceRange,
         isMangaLoading,
         mangaList,
+        pages,
+        sortPar,
+        currentPage,
         toggleSidebar,
         toggleGenre,
         toggleProduction,
@@ -179,6 +257,8 @@ function SidebarProvider({ children }) {
         fetchMangas,
         sortMangas,
         fetchMangasByParams,
+        clearFilter,
+        setGenresList,
       }}
     >
       {children}

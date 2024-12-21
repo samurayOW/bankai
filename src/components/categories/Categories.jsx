@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 
-function Category({ title, cover }) {
+function Category({ title, cover, id }) {
   return (
     <li className="bankai__categories-list_item">
-      <img src={`${BASE_URL}${cover}`} alt="category" />
-      <h4>{title}</h4>
+      <Link to={`/buy-manga/${id}`}>
+        <img src={`${BASE_URL}${cover}`} alt="category" />
+        <h4>{title}</h4>
+      </Link>
     </li>
   );
 }
@@ -21,10 +23,18 @@ function Categories() {
   useEffect(function () {
     async function fetchGenres() {
       setIsLoading(true);
-      const res = await fetch(`${BASE_URL}/api/genres?populate=*`);
-      const data = await res.json();
-      setGenres(data.data.slice(0, 3));
-      setIsLoading(false);
+      try {
+        const res = await fetch(`${BASE_URL}/api/genres?populate=*`);
+        if (!res.ok) {
+          throw new Error(`API Error: ${res.statusText}`);
+        }
+        const data = await res.json();
+        setGenres(data.data.slice(0, 3));
+      } catch (err) {
+        console.log("💥💥💥", err);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchGenres();
   }, []);
@@ -42,11 +52,14 @@ function Categories() {
               <MoonLoader color="#000" speedMultiplier={0.25} />
             ) : (
               genres.map((genre) => (
+                // <Link to={`/buy-manga/${genre.id}`}>
                 <Category
                   title={genre.Title}
                   cover={genre.Cover.url}
                   key={genre.id}
+                  id={genre.id}
                 />
+                // </Link>
               ))
             )}
           </ul>

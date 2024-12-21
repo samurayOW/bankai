@@ -16,8 +16,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="categories" element={<Categories />} />
-              <Route path="/manga" element={<MangaList />} />
-              <Route path="manga/:id" element={<Manga />} />
+              <Route path="/buy-manga" element={<MangaList />} />
+              <Route path="buy-manga/:genreId" element={<MangaList />} />
+              {/* <Route path="manga/:mangaId" element={<Manga />} /> */}
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>

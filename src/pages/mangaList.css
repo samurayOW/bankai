@@ -41,6 +41,11 @@
     gap: 4rem;
 }
 
+.bankai__manga-list-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .bankai__manga-list-products {
     width: 100%;
     display: flex;
@@ -49,6 +54,13 @@
     flex-wrap: wrap;
     gap: 2rem;
     padding-left: 3rem;
+}
+
+.bankai__manga-list-pages {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
 .bankai__manga-list-filter_btn {
@@ -60,6 +72,20 @@
     background-color: pink;
     margin-left: 1rem;
     /* display: none; */
+}
+
+.bankai__manga-list-page button {
+    border: 2px solid #fff;
+    color: #fff;
+    font-weight: 700;
+    background-color: transparent;
+    padding: 5px 0.5rem;
+    border-radius: 10px;
+}
+
+.bankai__manga-list-page.current-page button {
+    color: #000;
+    background-color: #fff;
 }
 
 @media screen and (max-width: 810px) {

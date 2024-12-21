@@ -15,6 +15,10 @@
     font-family: var(--font-family);
     color: #fff;
     margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 .bankai__manga-list-item p {
@@ -33,4 +37,24 @@
         height: 225px;
     }
 
+    .bankai__manga-list-item h4 {
+        max-width: 150px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .bankai__manga-list-item img {
+        width: 120px;
+        height: 175px;
+    }
+
+    .bankai__manga-list-item h4 {
+        max-width: 110px;
+    }
+
+    .bankai__manga-list-item h4,
+    .bankai__manga-list-item p,
+    .bankai__manga-list-item span {
+        font-size: 0.8rem;
+    }
 }

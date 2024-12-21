@@ -8,7 +8,7 @@ function MangaItem({ manga }) {
       <img src={`${BASE_URL}/${manga.Cover.url}`} alt="cover" />
       <h4>{manga.Title}</h4>
       <p>
-        {manga.production.Title} <FaStar /> 5{" "}
+        {manga.production.Title} <FaStar /> {manga.Rating}
       </p>
       <span>{manga.Price}$</span>
     </li>

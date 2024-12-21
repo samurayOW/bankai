@@ -4,6 +4,7 @@ import NewArrivalsItem from "../newArrivalsItem/NewArrivalsItem";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../strapi";
 import { MoonLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 
 function NewArrivals() {
   const [mangas, setMangas] = useState([]);
@@ -12,11 +13,19 @@ function NewArrivals() {
   useEffect(function () {
     async function fetchMangas() {
       setIsLoading(true);
-      const res = await fetch(`${BASE_URL}/api/mangas?populate=*`);
-      const data = await res.json();
-      data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      setMangas(data.data.slice(0, 3));
-      setIsLoading(false);
+      try {
+        const res = await fetch(`${BASE_URL}/api/mangas?populate=*`);
+        if (!res.ok) {
+          throw new Error(`API Error: ${res.statusText}`);
+        }
+        const data = await res.json();
+        data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setMangas(data.data.slice(0, 3));
+      } catch (err) {
+        console.log("💥💥💥", err);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchMangas();
   }, []);
@@ -29,9 +38,11 @@ function NewArrivals() {
           <p>
             Discover new manga every week, <br /> exclusively at our store
           </p>
-          <div className="bankai__new-arrivals-heading_btn">
-            <p>See More</p> <FaLongArrowAltRight />
-          </div>
+          <Link to="buy-manga">
+            <div className="bankai__new-arrivals-heading_btn">
+              <p>See More</p> <FaLongArrowAltRight />
+            </div>
+          </Link>
         </div>
         <ul className="bankai__new-arrivals-list">
           {isLoading ? (

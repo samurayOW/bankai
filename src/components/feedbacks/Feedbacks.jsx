@@ -35,11 +35,19 @@ function Feedbacks() {
   useEffect(function () {
     async function fetchFeedbacks() {
       setIsLoading(true);
-      const res = await fetch(`${BASE_URL}/api/feedbacks?populate=*`);
-      const data = await res.json();
-      data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      setFeedbacks(data.data);
-      setIsLoading(false);
+      try {
+        const res = await fetch(`${BASE_URL}/api/feedbacks?populate=*`);
+        if (!res.ok) {
+          throw new Error(`API Error: ${res.statusText}`);
+        }
+        const data = await res.json();
+        data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setFeedbacks(data.data);
+      } catch (err) {
+        console.log("💥💥💥", err);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchFeedbacks();
   }, []);
